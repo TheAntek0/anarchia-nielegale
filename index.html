@@ -45,22 +45,25 @@
   .brand { display: inline-flex; align-items: center; gap: 18px; text-align: left; }
   .brand img { height: 72px; }
   header p { letter-spacing: .5px; }
-  #lb { padding: 0; }
-  #lb .inner { display: flex; width: 100%; height: 100%; cursor: default; }
-  #lb .view { flex: 1; display: flex; align-items: center; justify-content: center; padding: 30px 70px; min-width: 0; }
+  #lb { padding: 20px; }
+  #lb .inner { display: flex; width: min(1100px, 100%); height: min(640px, 100%); background: #1e1f22; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,.6); cursor: default; position: relative; }
+  #lb .view { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px 60px; min-width: 0; background: #141517; }
   #lb .view img { max-width: 100%; max-height: 100%; }
-  #lb .side { width: 300px; flex: none; background: #2b2d31; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: -2px 0 8px rgba(0,0,0,.5); }
+  #lb .side { width: 340px; flex: none; background: #2b2d31; padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
   #lb .side .sec { color: #a8a8a8; font-size: 13px; }
   #lb .side .cap { color: #fff; font-size: 17px; font-weight: 600; line-height: 1.4; }
   #lb .side .st { font-weight: 600; font-size: 14px; }
   #lb .side .st.ok { color: #7cc47f; } #lb .side .st.bad { color: #e06c6c; }
+  #lb .side .sum { font-size: 14px; line-height: 1.55; color: #dcdcdc; margin-top: 6px; }
+  #lb .side .sum b { color: #fff; }
   #lb .side .cnt { margin-top: auto; color: #8a8a8a; font-size: 13px; }
   #lb .side .hint { color: #8a8a8a; font-size: 12px; }
-  #lb .btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 70px; border: 0; background: rgba(255,255,255,.08); color: #fff; font-size: 30px; cursor: pointer; }
+  #lb .btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 64px; border: 0; background: rgba(255,255,255,.08); color: #fff; font-size: 28px; cursor: pointer; }
   #lb .btn:hover { background: rgba(255,255,255,.18); }
-  #lb .prev { left: 10px; } #lb .next { right: 310px; }
-  #lb .close { position: absolute; top: 10px; right: 310px; border: 0; background: none; color: #fff; font-size: 28px; cursor: pointer; }
-  @media (max-width: 760px) { #lb .inner { flex-direction: column; } #lb .side { width: 100%; padding: 14px 18px; } #lb .view { padding: 20px 56px; } #lb .next, #lb .close { right: 10px; } }
+  #lb .prev { left: 8px; } #lb .next { right: 348px; }
+  #lb .close { position: absolute; top: 6px; right: 10px; border: 0; background: none; color: #a8a8a8; font-size: 26px; cursor: pointer; }
+  #lb .close:hover { color: #fff; }
+  @media (max-width: 860px) { #lb .inner { flex-direction: column; height: 100%; } #lb .side { width: 100%; padding: 14px 18px; } #lb .view { padding: 16px 52px; } #lb .next { right: 8px; } }
 </style>
 </head>
 <body>
@@ -197,6 +200,7 @@
     <div class="sec"></div>
     <div class="cap"></div>
     <div class="st"></div>
+    <div class="sum"></div>
     <div class="cnt"></div>
     <div class="hint">Strzałki ← → przełączają zdjęcia, Esc zamyka.</div>
   </div>
@@ -209,8 +213,18 @@
     src: f.querySelector('img').src,
     cap: f.querySelector('figcaption').textContent,
     sec: f.closest('section').querySelector('h2').childNodes[0].textContent.trim(),
+    id: f.closest('section').id,
     legal: f.classList.contains('legal')
   }));
+  const SUM = {
+    hitbox: '<b>W skrócie:</b> gracz w środku trapu zasłania hitboxem gracza pod sobą. Uwięziony nie postawi bloka ani nie rzuci perły. Ban dla trapującego i zrzucających dripy. Legalne tylko, gdy gracz jest głębiej i nie blokuje ucieczki.',
+    kratka: '<b>W skrócie:</b> przestrzeń 1x1 otoczona bedrockiem z każdej strony. Zwykle robiona na niedozwolonych modach. Legalny odpowiednik to kratka 2x1.',
+    spawn: '<b>W skrócie:</b> jakakolwiek część trapu w sektorze ochronnym (np. spawn), gdzie nie da się niszczyć bloków. Uwięziony nie ma żadnej możliwości ucieczki.',
+    wagoniki: '<b>W skrócie:</b> maksymalnie 4 wagoniki w trapie. Serwer ma limit 4 na chunk, więcej to wykorzystywanie błędów serwera.',
+    altowanie: '<b>W skrócie:</b> działanie, przez które gracz nie dostaje obrażeń. Rzadkie, ale zabronione.',
+    pety: '<b>W skrócie:</b> pety aktywowane w trapie (założone i schowane) mogą zablokować uwięzionemu każdą akcję. Zabronione.',
+    redstone: '<b>W skrócie:</b> zabronione, gdy mechanizm sam rzuca dripy albo jest na samym dole trapu i popycha gracza. Dozwolone, gdy tylko uruchamia inne elementy trapu (tłoki wpychające głębiej, dźwignie odsłaniające wejście).'
+  };
   let cur = 0;
   function show(i) {
     cur = (i + items.length) % items.length;
@@ -221,6 +235,7 @@
     const st = lb.querySelector('.st');
     st.textContent = it.legal ? 'Legalne' : 'Nielegalne';
     st.className = 'st ' + (it.legal ? 'ok' : 'bad');
+    lb.querySelector('.sum').innerHTML = SUM[it.id] || '';
     lb.querySelector('.cnt').textContent = (cur + 1) + ' / ' + items.length;
     lb.classList.add('on');
   }
@@ -228,7 +243,7 @@
   lb.querySelector('.prev').onclick = e => { e.stopPropagation(); show(cur - 1); };
   lb.querySelector('.next').onclick = e => { e.stopPropagation(); show(cur + 1); };
   lb.querySelector('.close').onclick = () => lb.classList.remove('on');
-  lb.querySelector('.view').onclick = e => { if (e.target !== lbImg) lb.classList.remove('on'); };
+  lb.onclick = e => { if (e.target === lb) lb.classList.remove('on'); };
   document.onkeydown = e => {
     if (!lb.classList.contains('on')) return;
     if (e.key === 'Escape') lb.classList.remove('on');
