@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nielegalne trapy | Anarchia.gg</title>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #2b2d31; color: #dcdcdc; font: 16px/1.65 "Segoe UI", Arial, sans-serif; }
+  header { padding: 40px 20px 28px; text-align: center; background: #232427; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  header h1 { margin: 0 0 6px; font-size: 34px; color: #fff; }
+  header p { margin: 0 auto; max-width: 640px; color: #a8a8a8; }
+  .wrap { display: grid; grid-template-columns: 220px 1fr; gap: 32px; max-width: 1140px; margin: 0 auto; padding: 28px 20px 60px; }
+  nav { position: sticky; top: 20px; align-self: start; background: #333539; padding: 14px 16px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+  nav b { display: block; margin-bottom: 8px; color: #fff; }
+  nav a { display: block; padding: 3px 0; color: #c8c8c8; text-decoration: none; font-size: 14px; }
+  nav a:hover { color: #fff; text-decoration: underline; }
+  section { background: #333539; border-radius: 4px; padding: 24px 26px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,.35); scroll-margin-top: 20px; }
+  h2 { margin: 0 0 12px; font-size: 23px; color: #fff; }
+  h3 { margin: 22px 0 6px; font-size: 18px; color: #fff; }
+  .tag { font-size: 15px; font-weight: 600; }
+  .tag.bad { color: #e06c6c; } .tag.ok { color: #7cc47f; }
+  .box { background: #2b2d31; border-radius: 4px; padding: 12px 16px; margin: 16px 0; box-shadow: inset 0 1px 3px rgba(0,0,0,.4); }
+  .box.bad b { color: #e06c6c; } .box.ok b { color: #7cc47f; }
+  .box p { margin: 0; }
+  u { text-underline-offset: 3px; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 14px 0; }
+  figure { margin: 0; background: #222326; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+  figure img { display: block; width: 100%; height: 280px; object-fit: contain; background: #1a1b1d; cursor: zoom-in; }
+  figcaption { padding: 7px 12px; font-size: 13px; color: #a8a8a8; }
+  ul { padding-left: 22px; } li { margin: 4px 0; }
+  #lb { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out; z-index: 10; }
+  #lb.on { display: flex; }
+  #lb img { max-width: 100%; max-height: 100%; }
+  footer { text-align: center; color: #8a8a8a; font-size: 13px; padding: 0 20px 36px; }
+  @media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } nav { position: static; } }
+  figure.illegal { border: 3px solid #e06c6c; }
+  figure.legal { border: 3px solid #7cc47f; }
+  figure.illegal figcaption { color: #e06c6c; font-weight: 600; }
+  figure.legal figcaption { color: #7cc47f; font-weight: 600; }
+  figure.legal figcaption .tag, figure.illegal figcaption .tag { color: inherit; font-size: 13px; }
+  nav a { border-left: 3px solid transparent; padding-left: 9px; }
+  nav a.active { color: #fff; font-weight: 600; border-left-color: #e06c6c; }
+  .brand { display: inline-flex; align-items: center; gap: 18px; text-align: left; }
+  .brand img { height: 72px; }
+  header p { letter-spacing: .5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="img/logo.png" alt="Anarchia.gg" onerror="this.remove()">
+    <div>
+      <h1>Nielegalne trapy</h1>
+      <p>Anarchia.gg · poradnik dla administracji</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <b>Spis treści</b>
+    <a href="#ogolne">Informacje ogólne</a>
+    <a href="#hitbox">Wystawanie hitboxem</a>
+    <a href="#kratka">Kratka 1x1b</a>
+    <a href="#spawn">Spawn i sektor ochronny</a>
+    <a href="#wagoniki">Limit wagoników</a>
+    <a href="#altowanie">Altowanie</a>
+    <a href="#pety">Pety w trapie</a>
+    <a href="#redstone">Mechanizmy (redstone)</a>
+  </nav>
+
+  <main>
+    <section id="ogolne">
+      <h2>Informacje ogólne</h2>
+      <div class="box bad"><p><b>Ban dostaje każdy, kto bierze udział w nielegalnym trapie.</b> Dotyczy to osoby trapującej (np. wystawiającej hitbox) i osób zrzucających dripy.</p></div>
+      <p>Poniżej są najczęstsze nielegalne trapy. To nie jest zamknięta lista. Administrator może uznać za nielegalny także inny trap, jeśli uwięziony gracz <b>nie ma żadnej możliwości ucieczki</b>.</p>
+    </section>
+
+    <section id="hitbox">
+      <h2>Wystawanie hitboxem <span class="tag bad">(nielegalne)</span></h2>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image8.png" alt="Wystawanie hitboxem"><figcaption>Wystawanie hitboxem</figcaption></figure>
+      </div>
+
+      <h3>Wariant „Leżenie”</h3>
+      <p>Gracz w środku trapu zasłania swoim hitboxem gracza pod sobą. Uwięziony nie może przez to stawiać bloków ani rzucać ender pereł, a trapujący spokojnie zrzuca na niego dripy.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image4.png" alt="Wariant leżenie"><figcaption>Wariant „Leżenie”</figcaption></figure>
+      </div>
+
+      <h3>Wariant „Stanie”</h3>
+      <p>Działa tak samo, tylko gracz zasłaniający stoi. Spotyka się go częściej niż leżenie.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image13.png" alt="Wariant stanie"><figcaption>Wariant „Stanie”</figcaption></figure>
+      </div>
+
+      <div class="box ok"><p><b>Wyjątek:</b> gracz, który jest w głębszej części trapu, bo np. poprawia bannery, <b><u>nie łamie zasad</u></b>, jeśli nie blokuje drogi ucieczki. Może to wyglądać podobnie do wystawania hitboxem, ale nie służy celowemu zasłanianiu.</p></div>
+      <div class="gallery">
+        <figure class="legal"><img src="img/image7.png" alt="Wariant legalny"><figcaption>Legalne: gracz w głębszej części trapu, nie blokuje ucieczki</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="kratka">
+      <h2>Kratka 1x1b (trap 1x1 z bedrocka) <span class="tag bad">(nielegalne)</span></h2>
+      <p>Trap jest nielegalny, gdy uwięziony gracz stoi w przestrzeni 1x1 otoczonej bedrockiem <b>z każdej strony</b>. Gracze, którzy go budują, zwykle korzystają z niedozwolonych modyfikacji.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image9.png" alt="Kratka 1x1b"><figcaption>Nielegalne: Kratka 1x1b</figcaption></figure>
+        <figure class="legal"><img src="img/image2.png" alt="Kratka 2x1"><figcaption>Legalne: Kratka 2x1</figcaption></figure>
+      </div>
+      <div class="box ok"><p><b>Legalny odpowiednik:</b> „Kratka 2x1”. Uwaga, bywa mylona z nielegalnym leżeniem albo z kratką 1x1b.</p></div>
+    </section>
+
+    <section id="spawn">
+      <h2>Trapy przy spawnie i sektorze ochronnym <span class="tag bad">(nielegalne)</span></h2>
+      <p>Działają podobnie jak kratka 1x1b. Często używa się przy nich niedozwolonych modyfikacji, a uwięziony gracz nie ma żadnych szans. <b>Ban jest wtedy, gdy jakakolwiek część trapu korzysta z sektora ochronnego</b> (np. spawnu), gdzie nie da się niszczyć bloków.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image10.png" alt="Trap przy sektorze"><figcaption>Gracz uwięziony przy sektorze. Dookoła nie da się nic zniszczyć, więc najpewniej był bity przez ścianę.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="wagoniki">
+      <h2>Przekroczenie limitu wagoników <span class="tag bad">(nielegalne)</span></h2>
+      <p>W trapie można użyć <b><u>maksymalnie 4 wagoników</u></b> (minecartów). Serwer ma limit 4 wagoników na chunk, więc więcej to <b><u>wykorzystywanie błędów serwera</u></b>.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image14.png" alt="Za dużo wagoników"><figcaption>Niedozwolone: 5 wagoników</figcaption></figure>
+        <figure class="legal"><img src="img/image1.png" alt="Dozwolona liczba wagoników"><figcaption>Dozwolone: 4 wagoniki</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="altowanie">
+      <h2>Altowanie <span class="tag bad">(nielegalne)</span></h2>
+      <p>Zdarza się rzadko, ale też jest zabronione. Altowanie to robienie czegoś, przez co gracz nie dostaje obrażeń (DMG).</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image5.png" alt="Altowanie"><figcaption>Przykład altowania</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="pety">
+      <h2>Pety w trapie <span class="tag bad">(nielegalne)</span></h2>
+      <p>Nie wolno używać w trapie petów, które gracz może aktywować, np. założyć i potem schować. Czasem uwięziony gracz nie może przez nie nic zrobić, więc nie da się wyjść z trapu.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image11.png" alt="Pety w trapie"><figcaption>Pety w trapie</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="redstone">
+      <h2>Mechanizmy (redstone) <span class="tag bad">(częściowo nielegalne)</span></h2>
+      <p>Mechanizmy (redstone, tłoki itp.) są zabronione w dwóch przypadkach.</p>
+
+      <h3>1. Zrzucanie dripów</h3>
+      <p>Mechanizm sam rzuca dripy na uwięzionego gracza.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image3.png" alt="Redstone zrzucający dripy"><figcaption>Mechanizm zrzucający dripy</figcaption></figure>
+      </div>
+
+      <h3>2. Mechanizm na dnie trapu</h3>
+      <p>Mechanizm (np. tłoki) popycha uwięzionego gracza na dole trapu albo jest w jego najniższej części, z której nie da się uciec.</p>
+      <div class="gallery">
+        <figure class="illegal"><img src="img/image6.png" alt="Tłoki na dnie trapu"><figcaption>Tłoki na dnie trapu</figcaption></figure>
+        <figure class="illegal"><img src="img/image12.png" alt="Tłoki na dnie trapu"><figcaption>Tłoki na dnie trapu</figcaption></figure>
+      </div>
+
+      <div class="box ok"><p><b>Dozwolone</b> są mechanizmy, które tylko uruchamiają inne elementy trapu, np.:</p>
+        <ul>
+          <li>tłoki wpychające gracza głębiej do trapu,</li>
+          <li>dźwignie, które tylko odsłaniają wejście do trapu lub jego element.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>Kliknij zdjęcie, aby je powiększyć.</footer>
+
+<div id="lb"><img alt=""></div>
+<script>
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.querySelectorAll('figure img').forEach(img => img.onclick = () => { lbImg.src = img.src; lb.classList.add('on'); });
+  lb.onclick = () => lb.classList.remove('on');
+  document.onkeydown = e => { if (e.key === 'Escape') lb.classList.remove('on'); };
+  const links = document.querySelectorAll('nav a');
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-30% 0px -65% 0px' });
+  document.querySelectorAll('main section').forEach(s => spy.observe(s));
+</script>
+</body>
+</html>
