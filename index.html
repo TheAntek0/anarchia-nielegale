@@ -225,6 +225,11 @@
     pety: '<b>W skrócie:</b> pety aktywowane w trapie (założone i schowane) mogą zablokować uwięzionemu każdą akcję. Zabronione.',
     redstone: '<b>W skrócie:</b> zabronione, gdy mechanizm sam rzuca dripy albo jest na samym dole trapu i popycha gracza. Dozwolone, gdy tylko uruchamia inne elementy trapu (tłoki wpychające głębiej, dźwignie odsłaniające wejście).'
   };
+  const LEGAL = {
+    'image7.png': '<b>Dlaczego legalne:</b> gracz jest w głębszej części trapu, bo np. poprawia bannery. Nie zasłania hitboxem gracza pod sobą i nie blokuje drogi ucieczki. Wygląda podobnie do wystawania hitboxem, ale nim nie jest.',
+    'image2.png': '<b>Dlaczego legalne:</b> uwięziony gracz ma przestrzeń 2x1, a nie 1x1 otoczoną bedrockiem. Ma możliwość działania i ucieczki. Nie mylić z nielegalnym leżeniem ani kratką 1x1b.',
+    'image1.png': '<b>Dlaczego legalne:</b> w trapie są dokładnie 4 wagoniki, czyli tyle, ile pozwala limit serwera na chunk. Każdy wagonik ponad 4 to już wykorzystywanie błędów serwera.'
+  };
   let cur = 0;
   function show(i) {
     cur = (i + items.length) % items.length;
@@ -235,7 +240,7 @@
     const st = lb.querySelector('.st');
     st.textContent = it.legal ? 'Legalne' : 'Nielegalne';
     st.className = 'st ' + (it.legal ? 'ok' : 'bad');
-    lb.querySelector('.sum').innerHTML = SUM[it.id] || '';
+    lb.querySelector('.sum').innerHTML = (it.legal && LEGAL[it.src.split('/').pop()]) || SUM[it.id] || '';
     lb.querySelector('.cnt').textContent = (cur + 1) + ' / ' + items.length;
     lb.classList.add('on');
   }
